@@ -4,6 +4,9 @@
 #include "GameFramework/Pawn.h"
 #include "CarPawn.generated.h"
 
+class UCameraComponent;
+class USpringArmComponent;
+
 UCLASS()
 class UE_DRIVING_API ACarPawn : public APawn
 {
@@ -14,6 +17,12 @@ public:
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+private:
+	UPROPERTY(VisibleAnywhere)
+	USpringArmComponent *SpringArm;
+	UPROPERTY(VisibleAnywhere)
+	UCameraComponent *Camera;
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent *CarBase;
 };
