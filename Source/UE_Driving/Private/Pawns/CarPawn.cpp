@@ -1,4 +1,5 @@
 #include "Pawns/CarPawn.h"
+#include "Components/CarMovementComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
@@ -16,6 +17,10 @@ ACarPawn::ACarPawn()
 	
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SpringArm);
+
+	CarMovementComponent = CreateDefaultSubobject<UCarMovementComponent>(TEXT("CarMovementComponent"));
+
+	AutoPossessPlayer = EAutoReceiveInput::Player0;
 }
 
 void ACarPawn::BeginPlay()
@@ -28,4 +33,21 @@ void ACarPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ACarPawn::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	PlayerInputComponent->BindAxis("MoveForward", this, &ACarPawn::MoveForward);
+
+}
+
+void ACarPawn::MoveForward(float Value)
+{
+	CarMovementComponent->SetThrottle(Value);
+}
+
+void ACarPawn::TurnRight(float Value)
+{
+	CarMovementComponent->SetSteering(Value);
 }

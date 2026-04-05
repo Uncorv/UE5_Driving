@@ -4,7 +4,9 @@
 #include "GameFramework/Pawn.h"
 #include "CarPawn.generated.h"
 
+class UCarMovementComponent;
 class UCameraComponent;
+class UInputComponent;
 class USpringArmComponent;
 
 UCLASS()
@@ -17,6 +19,10 @@ public:
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
+	virtual void SetupPlayerInputComponent(UInputComponent *PlayerInputComponent) override;
+
+	void MoveForward(float Value);
+	void TurnRight(float Value);
 
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -25,4 +31,6 @@ private:
 	UCameraComponent *Camera;
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent *CarBase;
+	UPROPERTY(VisibleAnywhere)
+	UCarMovementComponent *CarMovementComponent;
 };
