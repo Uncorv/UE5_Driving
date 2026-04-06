@@ -22,12 +22,22 @@ public:
 	void DoSteering(float DeltaTime);
 
 private:
+
 	float ThrottleInput = 0.f;
 	float SteeringInput = 0.f;
+
 	float CurrentSpeed = 0.f;
+
+	UPROPERTY(EditAnywhere)
+	float SteeringSpeed = 100.f;
+	UPROPERTY(EditAnywhere)
 	float MaxForwardSpeed = 1500.f;
+	UPROPERTY(EditAnywhere)
 	float MaxReverseSpeed = 500.f;
+	UPROPERTY(EditAnywhere)
 	float Acceleration = 3000.f;
+	UPROPERTY(EditAnywhere)
 	float Deceleration = 2000.f;
+	UPROPERTY(EditAnywhere)
 	float BrakeStrength = 5000.f;
 };

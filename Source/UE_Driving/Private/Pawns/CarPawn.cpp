@@ -39,6 +39,7 @@ void ACarPawn::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	PlayerInputComponent->BindAxis("MoveForward", this, &ACarPawn::MoveForward);
+	PlayerInputComponent->BindAxis("TurnRight", this, &ACarPawn::TurnRight);
 
 }
 

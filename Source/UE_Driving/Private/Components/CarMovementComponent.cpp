@@ -17,6 +17,7 @@ void UCarMovementComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	DoThrottle(DeltaTime);
+	DoSteering(DeltaTime);
 }
 
 void UCarMovementComponent::SetThrottle(float Value)
@@ -69,10 +70,14 @@ void UCarMovementComponent::DoThrottle(float DeltaTime)
 
 void UCarMovementComponent::SetSteering(float Value)
 {
-
+	SteeringInput = Value;
 }
 
 void UCarMovementComponent::DoSteering(float DeltaTime)
 {
-
+	if (CurrentSpeed != 0)
+	{
+		FRotator DeltaRotation(0.f, SteeringInput * SteeringSpeed * DeltaTime, 0.f);
+		GetOwner()->AddActorWorldRotation(DeltaRotation);
+	}
 }
