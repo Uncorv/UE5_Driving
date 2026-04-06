@@ -10,10 +10,23 @@ ACarPawn::ACarPawn()
 	CarBase = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CarBase"));
 	SetRootComponent(CarBase);
 
+	CarWheelFrontRight = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("FrontRightWheel"));
+	CarWheelFrontRight->SetupAttachment(CarBase);
+
+	CarWheelFrontLeft = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("FrontLeftWheel"));
+	CarWheelFrontLeft->SetupAttachment(CarBase);
+
+	CarWheelBackRight = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BackRightWheel"));
+	CarWheelBackRight->SetupAttachment(CarBase);
+
+	CarWheelBackLeft = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BackLeftWheel"));
+	CarWheelBackLeft->SetupAttachment(CarBase);
+
+
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm->SetupAttachment(CarBase);
 	SpringArm->TargetArmLength = 500.f;
-	SpringArm->SocketOffset = FVector(0.f, 0.f, 85.f);
+	SpringArm->bUsePawnControlRotation = true;
 	
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SpringArm);
@@ -21,6 +34,7 @@ ACarPawn::ACarPawn()
 	CarMovementComponent = CreateDefaultSubobject<UCarMovementComponent>(TEXT("CarMovementComponent"));
 
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
+
 }
 
 void ACarPawn::BeginPlay()
@@ -38,9 +52,11 @@ void ACarPawn::Tick(float DeltaTime)
 void ACarPawn::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
 	PlayerInputComponent->BindAxis("MoveForward", this, &ACarPawn::MoveForward);
 	PlayerInputComponent->BindAxis("TurnRight", this, &ACarPawn::TurnRight);
-
+	PlayerInputComponent->BindAxis("RotateCameraX", this, &ACarPawn::RotateCameraX);
+	PlayerInputComponent->BindAxis("RotateCameraY", this, &ACarPawn::RotateCameraY);
 }
 
 void ACarPawn::MoveForward(float Value)
@@ -51,4 +67,17 @@ void ACarPawn::MoveForward(float Value)
 void ACarPawn::TurnRight(float Value)
 {
 	CarMovementComponent->SetSteering(Value);
+}
+
+void ACarPawn::RotateCameraY(float Value)
+{
+	AddControllerPitchInput(Value);
+	UE_LOG(LogTemp, Warning, TEXT("PitchValue: %f"), Value);
+}
+
+void ACarPawn::RotateCameraX(float Value)
+{
+	AddControllerYawInput(Value);
+	UE_LOG(LogTemp, Warning, TEXT("YawValue: %f"), Value);
+
 }

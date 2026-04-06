@@ -23,6 +23,8 @@ public:
 
 	void MoveForward(float Value);
 	void TurnRight(float Value);
+	void RotateCameraX(float Value);
+	void RotateCameraY(float Value);
 
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -30,7 +32,17 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent *Camera;
 	UPROPERTY(VisibleAnywhere)
-	UStaticMeshComponent *CarBase;
-	UPROPERTY(VisibleAnywhere)
 	UCarMovementComponent *CarMovementComponent;
+
+	UPROPERTY(VisibleAnywhere, Category = "CarMesh")
+	UStaticMeshComponent *CarBase;
+	UPROPERTY(VisibleAnywhere, Category = "CarMesh")
+	UStaticMeshComponent *CarWheelFrontLeft;
+	UPROPERTY(VisibleAnywhere, Category = "CarMesh")
+	UStaticMeshComponent *CarWheelFrontRight;
+	UPROPERTY(VisibleAnywhere, Category = "CarMesh")
+	UStaticMeshComponent *CarWheelBackLeft;
+	UPROPERTY(VisibleAnywhere, Category = "CarMesh")
+	UStaticMeshComponent *CarWheelBackRight;
+	
 };
