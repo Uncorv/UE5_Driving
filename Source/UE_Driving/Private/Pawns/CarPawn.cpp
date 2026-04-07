@@ -22,7 +22,6 @@ ACarPawn::ACarPawn()
 	CarWheelBackLeft = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BackLeftWheel"));
 	CarWheelBackLeft->SetupAttachment(CarBase);
 
-
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm->SetupAttachment(CarBase);
 	SpringArm->TargetArmLength = 500.f;
@@ -32,8 +31,6 @@ ACarPawn::ACarPawn()
 	Camera->SetupAttachment(SpringArm);
 
 	CarMovementComponent = CreateDefaultSubobject<UCarMovementComponent>(TEXT("CarMovementComponent"));
-
-	AutoPossessPlayer = EAutoReceiveInput::Player0;
 
 }
 
