@@ -9,6 +9,10 @@ ACarPawn::ACarPawn()
 
 	CarBase = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CarBase"));
 	SetRootComponent(CarBase);
+	CarBase->SetCollisionProfileName(TEXT("Pawn"));
+	CarBase->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	CarBase->SetGenerateOverlapEvents(true);
+
 
 	CarWheelFrontRight = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("FrontRightWheel"));
 	CarWheelFrontRight->SetupAttachment(CarBase);
