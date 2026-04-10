@@ -1,5 +1,7 @@
 #include "Controllers/CarPlayerController.h"
+#include "Actors/CheckpointGate.h"
 #include "GameFramework/PlayerStart.h"
+#include "GameModes/CarGameMode.h"
 #include "Kismet/GameplayStatics.h"
 #include "Pawns/CarPawn.h"
 
@@ -9,6 +11,16 @@ void ACarPlayerController::OnPossess(APawn *InPawn)
 
 	CarPawn = Cast<ACarPawn>(InPawn);
 	CarPawn->OnDestroyed.AddDynamic(this, &ACarPlayerController::OnPawnDestroyed);
+}
+
+void ACarPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (ACarGameMode *GM = Cast<ACarGameMode>(GetWorld()->GetAuthGameMode()))
+	{
+		SetTarget(GM->GetStartGate());
+	}
 }
 
 void ACarPlayerController::OnPawnDestroyed(AActor *Actor)
@@ -28,4 +40,20 @@ void ACarPlayerController::OnPawnDestroyed(AActor *Actor)
 			}
 		}
 	}
+}
+
+void ACarPlayerController::IncrementCounter()
+{
+	++CheckpointCounter;
+	UE_LOG(LogTemp, Log, TEXT("Checkpoint Riched: %i"), CheckpointCounter);
+}
+
+void ACarPlayerController::SetTarget(ACheckpointGate *Gate)
+{
+	Target = Gate;
+}
+
+ACheckpointGate *ACarPlayerController::GetTarget() const
+{
+	return Target;
 }

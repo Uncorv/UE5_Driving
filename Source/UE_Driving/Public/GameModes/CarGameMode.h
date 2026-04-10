@@ -6,6 +6,7 @@
 
 class ACarPawn;
 class ACarPlayerController;
+class ACheckpointGate;
 
 UCLASS()
 class UE_DRIVING_API ACarGameMode : public AGameModeBase
@@ -15,10 +16,12 @@ class UE_DRIVING_API ACarGameMode : public AGameModeBase
 public:
 	ACarGameMode();
 
+	virtual void BeginPlay() override;
+
+	ACheckpointGate *GetStartGate() const;
+
 private:
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<ACarPawn> CarPawnClass;
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<ACarPlayerController> CarPlayerControllerClass;
-	
+
+	UPROPERTY()
+	ACheckpointGate *StartGate;
 };

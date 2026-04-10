@@ -73,12 +73,10 @@ void ACarPawn::TurnRight(float Value)
 void ACarPawn::RotateCameraY(float Value)
 {
 	AddControllerPitchInput(Value);
-	UE_LOG(LogTemp, Warning, TEXT("PitchValue: %f"), Value);
 }
 
 void ACarPawn::RotateCameraX(float Value)
 {
 	AddControllerYawInput(Value);
-	UE_LOG(LogTemp, Warning, TEXT("YawValue: %f"), Value);
 
 }
