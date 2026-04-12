@@ -16,6 +16,18 @@ Implemented systems:
 
 ---
 
+## 🎮️ Gameplay
+
+
+
+
+https://github.com/user-attachments/assets/e181e5bd-d2ac-4a46-b17f-ca9c4cb09cc6
+
+
+
+
+---
+
 ## 🧠 Architecture
 
 The project follows Unreal Engine gameplay framework principles.
