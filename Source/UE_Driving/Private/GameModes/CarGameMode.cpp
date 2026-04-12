@@ -18,12 +18,16 @@ void ACarGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	TArray<AActor *> Checkpoints;
-	UGameplayStatics::GetAllActorsOfClass(this, ACheckpointGate::StaticClass(), Checkpoints);
-	StartGate = Cast<ACheckpointGate>(Checkpoints[0]);
+	UGameplayStatics::GetAllActorsOfClass(this, ACheckpointGate::StaticClass(), CheckpointGates);
+	StartGate = Cast<ACheckpointGate>(CheckpointGates[0]);
 }
 
 ACheckpointGate *ACarGameMode::GetStartGate() const
 {
 	return StartGate;
+}
+
+TArray<AActor *> ACarGameMode::GetAllCheckpointGates() const
+{
+	return CheckpointGates;
 }

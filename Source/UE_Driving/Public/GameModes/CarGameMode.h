@@ -19,9 +19,12 @@ public:
 	virtual void BeginPlay() override;
 
 	ACheckpointGate *GetStartGate() const;
+	TArray<AActor *> GetAllCheckpointGates() const;
 
 private:
 
 	UPROPERTY()
 	ACheckpointGate *StartGate;
+	UPROPERTY()
+	TArray<AActor *> CheckpointGates;
 };

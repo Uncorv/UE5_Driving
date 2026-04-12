@@ -16,12 +16,16 @@ ACheckpointGate::ACheckpointGate()
 
 void ACheckpointGate::NotifyActorBeginOverlap(AActor *Actor)
 {
-	ACarPlayerController *PC = Cast<ACarPlayerController>(Actor->GetInstigator());
-	if (PC->GetTarget() == this)
+	ACarPlayerController *PC = Cast<ACarPlayerController>(Actor->GetInstigatorController());
+	if (PC)
 	{
-		PC->SetTarget(NextGate);
-		PC->IncrementCounter();
+		if (PC->GetTarget() == this)
+		{
+			PC->SetTarget(NextGate);
+			PC->IncrementCounter();
+		}
 	}
+	
 }
 
 ACheckpointGate *ACheckpointGate::GetNextGate() const

@@ -21,6 +21,6 @@ public:
 private:
 	UPROPERTY(VisibleAnywhere)
 	UBoxComponent *Box;
-	UPROPERTY()
+	UPROPERTY(EditAnywhere)
 	ACheckpointGate *NextGate;
 };

@@ -16,6 +16,10 @@ public:
 	virtual void OnPossess(APawn *InPawn) override;
 	virtual void BeginPlay() override;
 
+	void StartCheckpointsDriving();
+	void FinishCheckpointsDriving();
+	bool IsAllGatesPassed() const;
+
 	UFUNCTION()
 	void OnPawnDestroyed(AActor *Actor);
 	void IncrementCounter();

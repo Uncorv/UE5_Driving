@@ -17,10 +17,30 @@ void ACarPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
+	StartCheckpointsDriving();
+}
+
+void ACarPlayerController::StartCheckpointsDriving()
+{
 	if (ACarGameMode *GM = Cast<ACarGameMode>(GetWorld()->GetAuthGameMode()))
 	{
 		SetTarget(GM->GetStartGate());
 	}
+}
+
+void ACarPlayerController::FinishCheckpointsDriving()
+{
+		SetTarget(nullptr);
+		UE_LOG(LogTemp, Log, TEXT("Checkpoint Driving is finished!"));
+}
+
+bool ACarPlayerController::IsAllGatesPassed() const
+{
+	if (ACarGameMode *GM = Cast<ACarGameMode>(GetWorld()->GetAuthGameMode()))
+	{
+		return (CheckpointCounter >= GM->GetAllCheckpointGates().Num());
+	}
+	return false;
 }
 
 void ACarPlayerController::OnPawnDestroyed(AActor *Actor)
@@ -46,6 +66,11 @@ void ACarPlayerController::IncrementCounter()
 {
 	++CheckpointCounter;
 	UE_LOG(LogTemp, Log, TEXT("Checkpoint Riched: %i"), CheckpointCounter);
+
+	if (IsAllGatesPassed())
+	{
+		FinishCheckpointsDriving();
+	}
 }
 
 void ACarPlayerController::SetTarget(ACheckpointGate *Gate)
