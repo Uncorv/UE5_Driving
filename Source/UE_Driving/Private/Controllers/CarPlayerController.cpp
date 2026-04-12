@@ -31,7 +31,6 @@ void ACarPlayerController::StartCheckpointsDriving()
 void ACarPlayerController::FinishCheckpointsDriving()
 {
 		SetTarget(nullptr);
-		UE_LOG(LogTemp, Log, TEXT("Checkpoint Driving is finished!"));
 }
 
 bool ACarPlayerController::IsAllGatesPassed() const
@@ -70,7 +69,6 @@ void ACarPlayerController::OnPawnDestroyed(AActor *Actor)
 void ACarPlayerController::IncrementCounter()
 {
 	++CheckpointCounter;
-	UE_LOG(LogTemp, Log, TEXT("Checkpoint Riched: %i"), CheckpointCounter);
 
 	if (IsAllGatesPassed())
 	{
