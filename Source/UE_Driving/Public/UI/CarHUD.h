@@ -15,6 +15,9 @@ public:
 
 	void DrawCheckpointsCounter();
 	void DrawFinishMessage();
+	void DrawBestTime();
+	void DrawCurrentTime();
+	void DrawCurrentLap();
 
 private:
 	UPROPERTY()

@@ -25,12 +25,26 @@ void ACarPlayerController::StartCheckpointsDriving()
 	if (ACarGameMode *GM = Cast<ACarGameMode>(GetWorld()->GetAuthGameMode()))
 	{
 		SetTarget(GM->GetStartGate());
+		GetWorldTimerManager().SetTimer(Timer, this, &ACarPlayerController::UpdateTimer, 0.01f, true);
 	}
+}
+
+void ACarPlayerController::UpdateTimer()
+{
+	CurrentTime = GetWorld()->GetTimeSeconds() - StartTime;
 }
 
 void ACarPlayerController::FinishCheckpointsDriving()
 {
-		SetTarget(nullptr);
+	if (LapCounter <= 0 || CurrentTime < BestTime)
+	{
+		BestTime = CurrentTime;
+	}
+	LapCounter++;
+	CheckpointCounter = 0;
+	StartTime = GetWorld()->GetTimeSeconds();
+	CurrentTime = 0.f;
+	GetWorldTimerManager().SetTimer(Timer, this, &ACarPlayerController::UpdateTimer, 0.01f, true);
 }
 
 bool ACarPlayerController::IsAllGatesPassed() const
@@ -84,4 +98,19 @@ void ACarPlayerController::SetTarget(ACheckpointGate *Gate)
 ACheckpointGate *ACarPlayerController::GetTarget() const
 {
 	return Target;
+}
+
+int ACarPlayerController::GetCurrentLap() const
+{
+	return LapCounter;
+}
+
+float ACarPlayerController::GetBestTime() const
+{
+	return BestTime;
+}
+
+float ACarPlayerController::GetCurrentTime() const
+{
+	return CurrentTime;
 }
