@@ -3,6 +3,7 @@
 #include "Controllers/CarPlayerController.h"
 #include "Kismet/GameplayStatics.h"
 #include "Pawns/CarPawn.h"
+#include "UI/CarHUD.h"
 
 ACarGameMode::ACarGameMode()
 {
@@ -12,6 +13,7 @@ ACarGameMode::ACarGameMode()
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
 	PlayerControllerClass = ACarPlayerController::StaticClass();
+	HUDClass = ACarHUD::StaticClass();
 }
 
 void ACarGameMode::BeginPlay()
@@ -30,4 +32,9 @@ ACheckpointGate *ACarGameMode::GetStartGate() const
 TArray<AActor *> ACarGameMode::GetAllCheckpointGates() const
 {
 	return CheckpointGates;
+}
+
+int ACarGameMode::GetGatesNumber() const
+{
+	return CheckpointGates.Num();
 }

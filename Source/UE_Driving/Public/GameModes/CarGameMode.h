@@ -20,9 +20,9 @@ public:
 
 	ACheckpointGate *GetStartGate() const;
 	TArray<AActor *> GetAllCheckpointGates() const;
+	int GetGatesNumber() const;
 
 private:
-
 	UPROPERTY()
 	ACheckpointGate *StartGate;
 	UPROPERTY()

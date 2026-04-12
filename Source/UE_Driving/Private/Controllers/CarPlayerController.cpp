@@ -43,6 +43,11 @@ bool ACarPlayerController::IsAllGatesPassed() const
 	return false;
 }
 
+int ACarPlayerController::GetCheckpointCounter() const
+{
+	return CheckpointCounter;
+}
+
 void ACarPlayerController::OnPawnDestroyed(AActor *Actor)
 {
 	TArray<AActor *> Actors;

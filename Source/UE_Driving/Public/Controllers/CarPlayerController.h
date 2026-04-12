@@ -19,23 +19,20 @@ public:
 	void StartCheckpointsDriving();
 	void FinishCheckpointsDriving();
 	bool IsAllGatesPassed() const;
-
-	UFUNCTION()
-	void OnPawnDestroyed(AActor *Actor);
 	void IncrementCounter();
 	void SetTarget(ACheckpointGate *Gate);
 	ACheckpointGate *GetTarget() const;
+	int GetCheckpointCounter() const;
+
+	UFUNCTION()
+	void OnPawnDestroyed(AActor *Actor);
 
 private:
 	UPROPERTY()
 	ACarPawn *CarPawn;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<ACarPawn> CarPawnClass;
-	
 	UPROPERTY()
 	ACheckpointGate *Target;
-
 	int CheckpointCounter = 0;
-	int Checkpoints;
-
 };
